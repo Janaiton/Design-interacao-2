@@ -1,0 +1,263 @@
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade para celulares -->
+  <title>Trabalho 2 - Gerador de Páginas HTML</title> 
+
+  <!-- Importa o CSS do Bootstrap (para estilo e layout prontos) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* ESTILO GERAL DA PÁGINA */
+    body {
+      background-color: #555758; /* Cor de fundo da tela */
+      display: flex; /* Coloca o editor e a visualização lado a lado */
+      justify-content: center; /* Centraliza o conteúdo */
+      gap: 20px; /* Espaçamento entre as colunas */
+      padding: 20px; /* Margem interna da página */
+      font-family: Arial, sans-serif; /* Fonte usada */
+    }
+
+    /* Define o estilo do editor e da área de visualização */
+    .editor, .visualizacao {
+      width: 800px; /* Largura fixa */
+      background: white; /* Fundo branco */
+      border-radius: 10px; /* Bordas arredondadas */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+      padding: 20px; /* Espaçamento interno */
+    }
+
+    /* Define o estilo das imagens */
+    img {
+      max-width: 100%; /* Garante que não ultrapasse o tamanho do container */
+      border-radius: 8px; /* Bordas arredondadas */
+      margin-bottom: 20px; /* Espaço abaixo da imagem */
+    }
+
+    /* Define o estilo dos cards */
+    .card {
+      border: 2px solid #333; /* Borda escura */
+      padding: 15px; /* Espaçamento interno */
+      border-radius: 8px; /* Bordas arredondadas */
+      margin-bottom: 15px; /* Espaço entre os cards */
+    }
+  </style>
+</head>
+
+<body>
+ 
+  <!-- ÁREA DO EDITOR -->
+  <div class="editor">
+    <h2 class="text-center mb-4">Editor da Página</h2>
+
+    <!--  CABEÇALHO -->
+    <h4 class="mt-3">Cabeçalho</h4>
+
+    <!-- Campo de texto para o título do cabeçalho -->
+    <label for="textoCabecalho" class="form-label">Texto do Cabeçalho</label>
+    <input type="text" id="textoCabecalho" class="form-control mb-2" placeholder="Digite o texto do cabeçalho">
+
+    <!-- Escolher cor do fundo do cabeçalho -->
+    <label for="corCabecalho" class="form-label">Cor de fundo do cabeçalho</label>
+    <input type="color" id="corCabecalho" class="form-control form-control-color mb-3" value="#0d6efd">
+
+    <!-- Escolher cor do texto do cabeçalho -->
+    <label for="corTextoCabecalho" class="form-label">Cor do texto do cabeçalho</label>
+    <input type="color" id="corTextoCabecalho" class="form-control form-control-color mb-4" value="#ffffff">
+
+    <!-- SEÇÃO DE MANCHETES -->
+    <h4>Seção de Manchetes</h4>
+
+    <!-- Campo para o título principal -->
+    <label for="tituloPrincipal" class="form-label">Título Principal</label>
+    <input type="text" id="tituloPrincipal" class="form-control mb-2" placeholder="Digite o título principal">
+
+    <!-- Campo para selecionar imagem -->
+    <label for="imagemNoticia" class="form-label">Imagem do Topo</label>
+    <input type="file" id="imagemNoticia" accept="image/*" class="form-control mb-2">
+
+    <!-- Escolher cor de fundo da seção -->
+    <label for="corFundo" class="form-label">Cor de fundo da seção</label>
+    <input type="color" id="corFundo" class="form-control form-control-color mb-2" value="#ffffff">
+
+    <!-- Escolher cor do texto -->
+    <label for="corTexto" class="form-label">Cor do texto</label>
+    <input type="color" id="corTexto" class="form-control form-control-color mb-4" value="#000000">
+
+    <!-- CARDS -->
+    <h5>Cards de Manchetes</h5>
+
+    <!-- Card 1 -->
+    <label for="tituloCard1" class="form-label">Card 1 - Título</label>
+    <input type="text" id="tituloCard1" class="form-control mb-2" placeholder="Título do card 1">
+
+    <label for="subtituloCard1" class="form-label">Card 1 - Subtítulo</label>
+    <input type="text" id="subtituloCard1" class="form-control mb-2" placeholder="Subtítulo do card 1">
+
+    <!-- Card 2 -->
+    <label for="tituloCard2" class="form-label">Card 2 - Título</label>
+    <input type="text" id="tituloCard2" class="form-control mb-2" placeholder="Título do card 2">
+
+    <label for="subtituloCard2" class="form-label">Card 2 - Subtítulo</label>
+    <input type="text" id="subtituloCard2" class="form-control mb-4" placeholder="Subtítulo do card 2">
+
+    <!-- RODAPÉ -->
+    <h4>Rodapé</h4>
+
+    <!-- Campo de texto para o rodapé -->
+    <label for="textoRodape" class="form-label">Texto do Rodapé</label>
+    <input type="text" id="textoRodape" class="form-control mb-2" placeholder="Digite o texto do rodapé">
+
+    <!-- Escolher cor de fundo -->
+    <label for="corFundoRodape" class="form-label">Cor de fundo do rodapé</label>
+    <input type="color" id="corFundoRodape" class="form-control form-control-color mb-2" value="#0d6efd">
+
+    <!-- Escolher cor do texto -->
+    <label for="corTextoRodape" class="form-label">Cor do texto do rodapé</label>
+    <input type="color" id="corTextoRodape" class="form-control form-control-color mb-4" value="#ffffff">
+
+    <!-- Botões para controlar -->
+    <div class="d-flex justify-content-between">
+      <button id="botaoSalvar" class="btn btn-success">Salvar HTML</button>
+      <button id="botaoCarregar" class="btn btn-primary">Carregar HTML</button>
+      <button id="botaoLimpar" class="btn btn-danger">Limpar</button>
+    </div>
+  </div>
+
+  <!-- ÁREA DE VISUALIZAÇÃO -->
+  <div class="visualizacao" id="areaVisualizacao" style="text-align: center;">
+    <!-- Cabeçalho visual -->
+    <header id="cabecalhoPagina" class="p-3 text-center" style="background:#0d6efd;">
+      <h1 id="previsaoCabecalho">Cabeçalho da Página</h1>
+    </header>
+
+    <!-- Seção principal -->
+    <section id="secaoNoticias" class="p-3">
+      <h2 id="previsaoTitulo" class="text-center mb-3">Título Principal</h2>
+      <img id="previsaoImagem" src="" alt="">
+      <div class="card">
+        <h3 id="previsaoTituloCard1">Título do Card 1</h3>
+        <p id="previsaoSubtituloCard1">Subtítulo do Card 1</p>
+      </div>
+      <div class="card">
+        <h3 id="previsaoTituloCard2">Título do Card 2</h3>
+        <p id="previsaoSubtituloCard2">Subtítulo do Card 2</p>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="rodapePagina" class="text-center p-3" style="background:#0d6efd;">
+      <p id="previsaoRodape">Rodapé da Página</p>
+    </footer>
+  </div>
+
+  
+  <script>
+    /* SELECIONA OS ELEMENTOS DO FORMULÁRIO */
+    let textoCabecalho = document.querySelector('#textoCabecalho');
+    let corCabecalho = document.querySelector('#corCabecalho');
+    let corTextoCabecalho = document.querySelector('#corTextoCabecalho');
+
+    let tituloPrincipal = document.querySelector('#tituloPrincipal');
+    let imagemNoticia = document.querySelector('#imagemNoticia');
+    let corFundo = document.querySelector('#corFundo');
+    let corTexto = document.querySelector('#corTexto');
+
+    let tituloCard1 = document.querySelector('#tituloCard1');
+    let subtituloCard1 = document.querySelector('#subtituloCard1');
+    let tituloCard2 = document.querySelector('#tituloCard2');
+    let subtituloCard2 = document.querySelector('#subtituloCard2');
+
+    let textoRodape = document.querySelector('#textoRodape');
+    let corFundoRodape = document.querySelector('#corFundoRodape');
+    let corTextoRodape = document.querySelector('#corTextoRodape');
+
+    /* ELEMENTOS DE VISUALIZAÇÃO */
+    let previsaoCabecalho = document.querySelector('#previsaoCabecalho');
+    let cabecalhoPagina = document.querySelector('#cabecalhoPagina');
+
+    let previsaoTitulo = document.querySelector('#previsaoTitulo');
+    let previsaoImagem = document.querySelector('#previsaoImagem');
+    let secaoNoticias = document.querySelector('#secaoNoticias');
+
+    let previsaoTituloCard1 = document.querySelector('#previsaoTituloCard1');
+    let previsaoSubtituloCard1 = document.querySelector('#previsaoSubtituloCard1');
+    let previsaoTituloCard2 = document.querySelector('#previsaoTituloCard2');
+    let previsaoSubtituloCard2 = document.querySelector('#previsaoSubtituloCard2');
+
+    let previsaoRodape = document.querySelector('#previsaoRodape');
+    let rodapePagina = document.querySelector('#rodapePagina');
+
+    /* FUNÇÕES DO EDITOR */
+
+    // Atualiza o texto e cores do cabeçalho
+    textoCabecalho.addEventListener('input', e => previsaoCabecalho.textContent = e.target.value || 'Cabeçalho da Página');
+    corCabecalho.addEventListener('input', e => cabecalhoPagina.style.background = e.target.value);
+    corTextoCabecalho.addEventListener('input', e => cabecalhoPagina.style.color = e.target.value);
+
+    // Atualiza o título e cores da seção principal
+    tituloPrincipal.addEventListener('input', e => previsaoTitulo.textContent = e.target.value || 'Título Principal');
+    corFundo.addEventListener('input', e => secaoNoticias.style.background = e.target.value);
+    corTexto.addEventListener('input', e => secaoNoticias.style.color = e.target.value);
+
+    // Atualiza a imagem de topo da seção
+    imagemNoticia.addEventListener('change', e => {
+      let arquivo = e.target.files[0]; // Pega o arquivo selecionado
+      if (!arquivo) return; // Se não houver arquivo, sai
+      let leitor = new FileReader(); // Cria leitor de arquivo
+      leitor.onload = () => previsaoImagem.src = leitor.result; // Define a imagem no preview
+      leitor.readAsDataURL(arquivo); // Converte para base64
+    });
+
+    // Atualiza o conteúdo dos cards
+    tituloCard1.addEventListener('input', e => previsaoTituloCard1.textContent = e.target.value || 'Título do Card 1');
+    subtituloCard1.addEventListener('input', e => previsaoSubtituloCard1.textContent = e.target.value || 'Subtítulo do Card 1');
+    tituloCard2.addEventListener('input', e => previsaoTituloCard2.textContent = e.target.value || 'Título do Card 2');
+    subtituloCard2.addEventListener('input', e => previsaoSubtituloCard2.textContent = e.target.value || 'Subtítulo do Card 2');
+
+    // Atualiza o rodapé
+    textoRodape.addEventListener('input', e => previsaoRodape.textContent = e.target.value || 'Rodapé da Página');
+    corFundoRodape.addEventListener('input', e => rodapePagina.style.background = e.target.value);
+    corTextoRodape.addEventListener('input', e => rodapePagina.style.color = e.target.value);
+
+    /* ==== LOCALSTORAGE ==== */
+    let botaoSalvar = document.querySelector('#botaoSalvar');
+    let botaoCarregar = document.querySelector('#botaoCarregar');
+    let botaoLimpar = document.querySelector('#botaoLimpar');
+
+    // Função que gera o HTML final completo
+    function gerarHtmlCompleto() {
+      let conteudo = document.querySelector('#areaVisualizacao').innerHTML; // Captura a área de visualização
+      let htmlFinal = `<!DOCTYPE html>\n<html lang='pt-BR'>\n<head>\n<meta charset='UTF-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0'>\n<title>Página Gerada</title>\n</head>\n<body>\n${conteudo}\n</body>\n</html>`;
+      return htmlFinal;
+    }
+
+    // Botão de salvar: guarda o código no LocalStorage
+    botaoSalvar.addEventListener('click', () => {
+      let codigo = gerarHtmlCompleto();
+      localStorage.setItem('paginaGerada', codigo); // Salva com nome "paginaGerada"
+      alert('Página salva com sucesso no LocalStorage!');
+    });
+
+    // Botão de carregar: abre a página salva em uma nova aba
+    botaoCarregar.addEventListener('click', () => {
+      let codigoSalvo = localStorage.getItem('paginaGerada');
+      if (codigoSalvo) {
+        let novaJanela = window.open('', '_blank');
+        novaJanela.document.open();
+        novaJanela.document.write(codigoSalvo);
+        novaJanela.document.close();
+      } else {
+        alert('Nenhuma página salva encontrada.');
+      }
+    });
+
+    // Botão de limpar: apaga o conteúdo salvo no LocalStorage
+    botaoLimpar.addEventListener('click', () => {
+      localStorage.removeItem('paginaGerada');
+      alert('LocalStorage limpo com sucesso!');
+    });
+  </script>
+</body>
+</html>
